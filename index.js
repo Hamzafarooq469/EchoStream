@@ -3,6 +3,7 @@ const express = require("express")
 const dotenv = require("dotenv")
 const cors = require("cors")
 const pool = require("./config/db")
+const { createUserTable } = require("./data/createUserTable")
 
 dotenv.config({
     path: "./config/.env"
@@ -25,9 +26,10 @@ app.use(express.json())
 app.use(express.urlencoded ({ extended: true}))
 
 // Routes
-
+app.use("/api", require("./routes/userRoutes"))
 
 // Error Handling
+createUserTable()
 
 // Test
 app.get('/', async(req, res) => {
